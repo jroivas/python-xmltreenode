@@ -9,4 +9,7 @@
         <number value="1" />
         <number value="42">fourtytwo</number>
     </text>
+    <text>
+        <a/>
+    </text>
 </test>
