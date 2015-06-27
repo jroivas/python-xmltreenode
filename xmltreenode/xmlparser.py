@@ -239,7 +239,7 @@ class CustomXMLParser():
         @param xmlfile Input XML file
         @param sourceIsFile Set this True if xmlfile parameter is a file, False if it contains XML content as a string
         @param addDummy Add given xml file contents to into dummy element, <dummy> xmlfile </dummy>
-        @returns InputParser instance containing the loaded file OR list of XMLTreeNode instances containing tag elements in case multiple root tags found
+        @returns CustomXMLParser instance containing the loaded file OR list of XMLTreeNode instances containing tag elements in case multiple root tags found
         """
         if xmlfile is None:
             return self

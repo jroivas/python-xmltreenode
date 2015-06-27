@@ -355,7 +355,7 @@ class XMLTreeNode(object):
         This allows future manipulation or queries to the tree. Also identifying each node's parent is easy with getParent()
 
         @param name Value to be search for
-        @returns List of InputParser of the corresponding child trees
+        @returns List of CustomXMLParser of the corresponding child trees
 
         @code
         For example:
@@ -409,7 +409,7 @@ class XMLTreeNode(object):
         after that take the subtree nodes
 
         @param name Value to be search for
-        @returns List of InputParser of the corresponding child trees
+        @returns List of CustomXMLParser of the corresponding child trees
         """
         trees = []
         if self.isData(name):
