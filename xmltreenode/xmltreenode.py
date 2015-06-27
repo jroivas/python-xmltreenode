@@ -463,11 +463,11 @@ class XMLTreeNode(object):
         for child in self.getChildren():
             yield child
 
-    class TreeNodeList:
+    class XMLTreeNodeList:
         """ List of tree nodes with special accessibility helpers
         """
         def __init__(self):
-            """ Initialize TreeNodeList
+            """ Initialize XMLTreeNodeList
             """
             self.node_list = []
 
@@ -553,18 +553,18 @@ class XMLTreeNode(object):
                 if len(cc) == 0:
                     return res[0].getData()
 
-                res2 = self.TreeNodeList()
+                res2 = self.XMLTreeNodeList()
                 for res_data in res:
                     res2.append(res_data)
                 return res2
 
-            res2 = self.TreeNodeList()
+            res2 = self.XMLTreeNodeList()
             for r in res:
                 res2.append(r)
             return res2
 
         if list(self):
-            res = self.TreeNodeList()
+            res = self.XMLTreeNodeList()
             cc = self._children
             for c in cc:
                 if c.isData(index):

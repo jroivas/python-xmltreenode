@@ -39,8 +39,18 @@ class TestTreenode(unittest.TestCase):
         self.ba.addChild(self.bab)
         self.ca = xmltreenode.XMLTreeNode("Test")
         self.cb = xmltreenode.XMLTreeNode("Other")
+        self.cc = xmltreenode.XMLTreeNode("Test2")
         self.c.addChild(self.ca)
         self.c.addChild(self.cb)
+        self.c.addChild(self.cc)
+
+        self.iters = xmltreenode.XMLTreeNode("root")
+        self.iters.addChild(xmltreenode.XMLTreeNode("Test"))
+        self.iters.addChild(xmltreenode.XMLTreeNode("Test"))
+        self.iters.addChild(xmltreenode.XMLTreeNode("Test2"))
+        self.iters_o = xmltreenode.XMLTreeNode("Other")
+        self.iters_o.addChild(xmltreenode.XMLTreeNode("Test"))
+        self.iters.addChild(self.iters_o)
 
     def test_treeNode(self):
         node = self.node
@@ -59,7 +69,7 @@ class TestTreenode(unittest.TestCase):
 
         self.assertEqual(node.numChildren(), 2)
 
-    def test_treenode_deepcopy(self):
+    def test_xmltreenode_deepcopy(self):
         node = xmltreenode.XMLTreeNode("root")
         child_a = xmltreenode.XMLTreeNode("a")
         node.addChild(child_a)
@@ -76,7 +86,7 @@ class TestTreenode(unittest.TestCase):
         for i in range(len(node)):
             self.assertNotEqual(node_child[i], deepcopynode_child[i])
 
-    def test_treenode_copy(self):
+    def test_xmltreenode_copy(self):
         node = xmltreenode.XMLTreeNode("root")
         child_a = xmltreenode.XMLTreeNode("a")
         node.addChild(child_a)
@@ -132,7 +142,7 @@ class TestTreenode(unittest.TestCase):
 
         node.addChild(c1)
 
-    def test_treenode_insertAfterChild(self):
+    def test_xmltreenode_insertAfterChild(self):
         node = xmltreenode.XMLTreeNode("root")
         child_a = xmltreenode.XMLTreeNode("a")
         child_b = xmltreenode.XMLTreeNode("b")
@@ -153,7 +163,7 @@ class TestTreenode(unittest.TestCase):
         self.assertEqual(node_child[2], child_b)
         self.assertEqual(node_child[0].getRoot(), node_child[1].getRoot())
 
-    def test_treenode_insertAfterChild_without_reparenting(self):
+    def test_xmltreenode_insertAfterChild_without_reparenting(self):
         node = xmltreenode.XMLTreeNode("root")
         child_a = xmltreenode.XMLTreeNode("a")
         child_b = xmltreenode.XMLTreeNode("b")
@@ -173,7 +183,7 @@ class TestTreenode(unittest.TestCase):
         self.assertEqual(node_child[1], child_c)
         self.assertEqual(node_child[2], child_b)
 
-    def test_treenode_insertAfterChild_after_child_not_found_append_added_child_to_list(self):
+    def test_xmltreenode_insertAfterChild_after_child_not_found_append_added_child_to_list(self):
         node = xmltreenode.XMLTreeNode("root")
         child_a = xmltreenode.XMLTreeNode("a")
         child_b = xmltreenode.XMLTreeNode("b")
@@ -194,7 +204,7 @@ class TestTreenode(unittest.TestCase):
         self.assertEqual(node_child[1], child_b)
         self.assertEqual(node_child[2], child_d)
 
-    def test_treenode_insertAfterChild_multiple_childrens(self):
+    def test_xmltreenode_insertAfterChild_multiple_childrens(self):
         node = xmltreenode.XMLTreeNode("root")
         child_a = xmltreenode.XMLTreeNode("a")
         child_b = xmltreenode.XMLTreeNode("b")
@@ -218,7 +228,7 @@ class TestTreenode(unittest.TestCase):
         self.assertEqual(node_child[2], child_d)
         self.assertEqual(node_child[3], child_b)
 
-    def test_treenode_insertChild(self):
+    def test_xmltreenode_insertChild(self):
         node = xmltreenode.XMLTreeNode("root")
         child_a = xmltreenode.XMLTreeNode("a")
         child_b = xmltreenode.XMLTreeNode("b")
@@ -239,7 +249,7 @@ class TestTreenode(unittest.TestCase):
         self.assertEqual(node_child[2], child_b)
         self.assertEqual(node_child[0].getRoot(), node_child[1].getRoot())
 
-    def test_treenode_insertChild_without_reparenting(self):
+    def test_xmltreenode_insertChild_without_reparenting(self):
         node = xmltreenode.XMLTreeNode("root")
         child_a = xmltreenode.XMLTreeNode("a")
         child_b = xmltreenode.XMLTreeNode("b")
@@ -260,7 +270,7 @@ class TestTreenode(unittest.TestCase):
         self.assertEqual(node_child[2], child_b)
         self.assertNotEqual(node_child[0].getRoot(), node_child[1].getRoot())
 
-    def test_treenode_insertChild_multiple_childs(self):
+    def test_xmltreenode_insertChild_multiple_childs(self):
         node = xmltreenode.XMLTreeNode("root")
         child_a = xmltreenode.XMLTreeNode("a")
         child_b = xmltreenode.XMLTreeNode("b")
@@ -284,7 +294,7 @@ class TestTreenode(unittest.TestCase):
         self.assertEqual(node_child[2], child_d)
         self.assertEqual(node_child[3], child_b)
 
-    def test_treenode_append_insert_and_remove(self):
+    def test_xmltreenode_append_insert_and_remove(self):
         node = xmltreenode.XMLTreeNode("root")
         child_a = xmltreenode.XMLTreeNode("a")
         child_b = xmltreenode.XMLTreeNode("b")
@@ -305,7 +315,7 @@ class TestTreenode(unittest.TestCase):
 
         self.assertEqual(node.getChildren(), [child_b, child_c])
 
-    def test_treenode_numChildren(self):
+    def test_xmltreenode_numChildren(self):
         node = xmltreenode.XMLTreeNode("root")
         child_a = xmltreenode.XMLTreeNode("a")
         child_b = xmltreenode.XMLTreeNode("b")
@@ -319,7 +329,7 @@ class TestTreenode(unittest.TestCase):
         node.addChild(child_c)
         self.assertEqual(node.numChildren(), 3)
 
-    def test_treenode_getChildren_and_getChildrenRef(self):
+    def test_xmltreenode_getChildren_and_getChildrenRef(self):
         node = xmltreenode.XMLTreeNode("root")
         child_a = xmltreenode.XMLTreeNode("a")
         child_b = xmltreenode.XMLTreeNode("b")
@@ -342,7 +352,7 @@ class TestTreenode(unittest.TestCase):
         self.assertEqual(id(childs_ref), id(childs_ref_new))
         self.assertNotEqual(id(childs), id(childs_new))
 
-    def test_treenode_setData_and_getData(self):
+    def test_xmltreenode_setData_and_getData(self):
         root = "root"
         node = xmltreenode.XMLTreeNode(root)
         test_data = "test_data"
@@ -354,7 +364,7 @@ class TestTreenode(unittest.TestCase):
         self.assertTrue(node.isData(test_data))
         self.assertFalse(node.isData("random"))
 
-    def test_treenode_reparent(self):
+    def test_xmltreenode_reparent(self):
         node = xmltreenode.XMLTreeNode("root")
         child_a = xmltreenode.XMLTreeNode("a")
 
@@ -364,7 +374,7 @@ class TestTreenode(unittest.TestCase):
         self.assertNotEqual(orig_root, new_root)
         self.assertEqual(new_root.toSimpleString(), '<a><root /></a>')
 
-    def test_treenode_reparent_child_not_added(self):
+    def test_xmltreenode_reparent_child_not_added(self):
         node = xmltreenode.XMLTreeNode("root")
         child_a = xmltreenode.XMLTreeNode("a")
 
@@ -374,7 +384,7 @@ class TestTreenode(unittest.TestCase):
         self.assertNotEqual(orig_root, new_root)
         self.assertEqual(new_root.toSimpleString(), '<a />')
 
-    def test_treenode_reparent_parent(self):
+    def test_xmltreenode_reparent_parent(self):
         node = xmltreenode.XMLTreeNode("root")
         child_a = xmltreenode.XMLTreeNode("a")
 
@@ -388,7 +398,7 @@ class TestTreenode(unittest.TestCase):
         self.assertEqual(new_root, new_root_2)
         self.assertEqual(new_root_2.toSimpleString(), '<a><root /></a>')
 
-    def test_treenode_removeChild(self):
+    def test_xmltreenode_removeChild(self):
         node = xmltreenode.XMLTreeNode("root")
         child_a = xmltreenode.XMLTreeNode("a")
         child_b = xmltreenode.XMLTreeNode("b")
@@ -402,14 +412,14 @@ class TestTreenode(unittest.TestCase):
         self.assertEqual(len(node), 1)
         self.assertEqual(node_child[0], child_b)
 
-    def test_treenode_removeChild_child_not_in_parents_child_list(self):
+    def test_xmltreenode_removeChild_child_not_in_parents_child_list(self):
         node = xmltreenode.XMLTreeNode("root")
         child_a = xmltreenode.XMLTreeNode("a")
         child_a.reparent(node, addchild=False)
 
         self.assertFalse(node.removeChild(child_a))
 
-    def test_treenode_removeChild_removed_child_has_different_parent(self):
+    def test_xmltreenode_removeChild_removed_child_has_different_parent(self):
         node = xmltreenode.XMLTreeNode("root")
         node2 = xmltreenode.XMLTreeNode("root2")
         child_a = xmltreenode.XMLTreeNode("a")
@@ -449,7 +459,7 @@ class TestTreenode(unittest.TestCase):
         self.assertFalse(node.isAttrib("tag"))
         self.assertDictEqual(node.getAttributes(), {"root": "value"})
 
-    def test_treenode_getRoot(self):
+    def test_xmltreenode_getRoot(self):
         node = xmltreenode.XMLTreeNode("root")
         child_a = xmltreenode.XMLTreeNode("a")
         node.addChild(child_a)
@@ -457,14 +467,14 @@ class TestTreenode(unittest.TestCase):
         self.assertEqual(node.getRoot().toSimpleString(), child_a.getRoot().toSimpleString())
         self.assertEqual(node.getRoot().toSimpleString(), "<root><a /></root>")
 
-    def test_treenode_getParent(self):
+    def test_xmltreenode_getParent(self):
         node = xmltreenode.XMLTreeNode("root")
         child_a = xmltreenode.XMLTreeNode("a")
         node.addChild(child_a)
 
         self.assertEqual(child_a.getParent(), node)
 
-    def test_treenode_getSubTreeNodesByName(self):
+    def test_xmltreenode_getSubTreeNodesByName(self):
         root = self.root
 
         ret_tree = root.getSubTreeNodesByName('Test')
@@ -473,7 +483,7 @@ class TestTreenode(unittest.TestCase):
         self.assertIn(self.ba, ret_tree)
         self.assertIn(self.ca, ret_tree)
 
-    def test_treenode_getTreeNodeByName(self):
+    def test_xmltreenode_getTreeNodeByName(self):
         root = self.root
 
         ret_val = root.getTreeNodeByName('Test')
@@ -482,20 +492,20 @@ class TestTreenode(unittest.TestCase):
         ret_val = root.getTreeNodeByName('SubTest2')
         self.assertEqual(ret_val, self.bab)
 
-    def test_treenode_getTreeNodeByName_name_not_found(self):
+    def test_xmltreenode_getTreeNodeByName_name_not_found(self):
         root = self.root
 
         ret_val = root.getTreeNodeByName('NotFound')
         self.assertEqual(ret_val, None)
 
-    def test_treenode_getTreeNodeByName_name_root(self):
+    def test_xmltreenode_getTreeNodeByName_name_root(self):
         root = self.root
 
         ret_val = root.getTreeNodeByName('root')
         self.assertEqual(ret_val, self.root)
 
-    def test_treenode_TreeNodeList(self):
-        tree_node_list = xmltreenode.XMLTreeNode.TreeNodeList()
+    def test_xmltreenode_XMLTreeNodeList(self):
+        tree_node_list = xmltreenode.XMLTreeNode.XMLTreeNodeList()
         child_a = xmltreenode.XMLTreeNode("a")
 
         self.assertEqual(len(tree_node_list), 0)
@@ -512,7 +522,7 @@ class TestTreenode(unittest.TestCase):
         self.assertEqual(tree_node_list[0], self.root)
         self.assertEqual(tree_node_list[10], None)
 
-    def test_treenode_indent_and_toString(self):
+    def test_xmltreenode_indent_and_toString(self):
         node = xmltreenode.XMLTreeNode("root")
         child_a = xmltreenode.XMLTreeNode("a")
         child_aa = xmltreenode.XMLTreeNode("aa")
@@ -524,7 +534,7 @@ class TestTreenode(unittest.TestCase):
 
         self.assertEqual(node.toString(), expected_output)
 
-    def test_treenode_toString(self):
+    def test_xmltreenode_toString(self):
         node = xmltreenode.XMLTreeNode("root")
         child_a = xmltreenode.XMLTreeNode("a")
         child_aa = xmltreenode.XMLTreeNode("aa")
@@ -536,7 +546,7 @@ class TestTreenode(unittest.TestCase):
 
         self.assertEqual(node.toString(), expected_output)
 
-    def test_treenode_toSortString(self):
+    def test_xmltreenode_toSortString(self):
         node = xmltreenode.XMLTreeNode("root")
         node.addAttrib("root", "value")
         node.addAttrib("a", "test")
@@ -544,7 +554,7 @@ class TestTreenode(unittest.TestCase):
 
         self.assertEqual(node.toSortString(), expected_output)
 
-    def test_treenode_toRecursiveSortString(self):
+    def test_xmltreenode_toRecursiveSortString(self):
         node = xmltreenode.XMLTreeNode("root")
         node.addAttrib("root", "value")
         child_a = xmltreenode.XMLTreeNode("a")
@@ -553,3 +563,45 @@ class TestTreenode(unittest.TestCase):
         expected_output = "root{'root':'value'}a{'a':'test'}"
 
         self.assertEqual(node.toRecursiveSortString(), expected_output)
+
+    def test_xmltreenode_finditer(self):
+        node = self.iters
+        index = 0
+        for elem in node.finditer("Test"):
+            self.assertEqual(elem.getData(), "Test")
+            index += 1
+        self.assertEqual(index, 2)
+
+    def test_xmltreenode_findall(self):
+        node = self.iters
+        self.assertEqual(len(node.findall("Test")), 2)
+        self.assertEqual(len(node.findall("not_existing_child")), 0)
+
+    def test_xmltreenode_iter_start(self):
+        node = self.iters
+        index = 0
+        for elem in node.iter('*'):
+            index += 1
+        self.assertEqual(index, 6)
+
+    def test_xmltreenode_iter(self):
+        node = self.iters
+        index = 0
+        for elem in node.iter():
+            index += 1
+        self.assertEqual(index, 6)
+
+    def test_xmltreenode_iter_element(self):
+        node = self.iters
+        index = 0
+        for elem in node.iter('Test'):
+            index += 1
+        self.assertEqual(index, 3)
+
+    def test_xmltreenode_getSelfAndSubTreeNodesByName(self):
+        node = self.iters
+        items = node.getSelfAndSubTreeNodesByName('Test')
+        self.assertEqual(len(items), 3)
+
+        items = node.getSelfAndSubTreeNodesByName('root')
+        self.assertEqual(len(items), 1)

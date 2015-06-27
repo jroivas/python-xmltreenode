@@ -114,6 +114,25 @@ class TestXmlparser(unittest.TestCase):
         self.assertEqual(root.getData(), "root")
         self.assertEqual(root.numChildren(), 3)
 
+    def test_xmlparser_CustomXMLParser_getitem(self):
+        iparse = xmlparser.CustomXMLParser()
+        self.assertEqual(iparse["root"], None)
+        res = iparse.load(self.dummyXML, sourceIsFile=False)
+        self.assertNotEqual(res, None)
+
+        root = iparse["root"]
+        self.assertEqual(root["a"], "b")
+        self.assertEqual(root["d"].numChildren(), 3)
+
+    def test_xmlparser_CustomXMLParser_contains(self):
+        iparse = xmlparser.CustomXMLParser()
+        self.assertFalse("root" in iparse)
+
+        res = iparse.load(self.dummyXML, sourceIsFile=False)
+        self.assertNotEqual(res, None)
+
+        self.assertTrue("root" in iparse)
+
     def test_xmlparser_start_and_end_basic(self):
         data = """<tag1>
   <tag2 a="1" b="2" c="3" d="4" />
